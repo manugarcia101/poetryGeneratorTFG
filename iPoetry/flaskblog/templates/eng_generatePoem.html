@@ -1,0 +1,38 @@
+{% extends "eng_layout.html" %} {% block gen %}
+
+<h1>What is iPoetry?</h1>
+<h6>iPoetry is an application capable of generating through the use of an artificial intelligence a poem with characteristics and style similar to those of the author that the user chooses.</h6> <br>
+<h6>Would you like to be inspiration to create a poem?</h6>
+<br>
+
+<form action="http://localhost:5000/eng_poem" method="POST">
+    <h6>Select the country:</h6>
+    <select name="country" class="custom-select-sm" onchange="UpdateFields(true)" id="language" >
+        <option selected value="">Argentina</option>
+        <option value="">Chile</option>
+        <option value="">Cuba</option>
+        <option value="">Spain</option>
+        <option value="">Mexico</option>
+        <option value="">Nicaragua</option>
+    </select>
+    <h6>Select the autor:</h6>
+    <select name="escritor" class="custom-select-sm" onchange="UpdateFields(false)" id="author">
+        <option selected value="">Julio Cortázar</option>
+    </select>
+
+    <h6>Choose you own author's name:</h6>
+    <input name="author" type="text" placeholder="Author's name" size="40">
+    <h6>Choose your own poem's title:</h6>
+    <input name="poemtitle" type="text" placeholder="Poem's title" size="40">
+    <h6>Introduce the seed for your poem:</h6>
+    <input class="form-group" name="seed" type="text" placeholder="Introduce a seed (40 chars maximun)" maxlength="40" size="40">
+    <br><br>
+
+    <center>
+        <input class="btn btn-info btn-lg" type="submit" value="Generate poem" id="submitbutton" />
+    </center>
+
+</form>
+
+<br> 
+{% endblock gen %}

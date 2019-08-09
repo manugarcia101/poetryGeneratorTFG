@@ -1,0 +1,32 @@
+El train 1 esta puesto a diversidad 0.2, 0.5, 1.0 y 1.2, max len 20 epochs 100 batch size 128
+El train 2 esta puesto a diversidad 0.5, 0.8, 1.0 y 1.2, max len 20 epochs 100 batch size 128
+El train 3 esta puesto a diversidad 0.8, 1.0 y 1.2, max len 20 epochs 100 batch size 128
+El train 4 esta puesto a diversidad 1.0 y 1.2, max len 20 epochs 100 batch size 128
+El train 5 esta puesto a diversidad 0.2, 0.5, 1.0 y 1.2, max len 20 epochs 1000 batch size 128 (loss 0.12)
+El train 6 esta puesto a diversidad 0.5, 0.8, 1.0 y 1.2, max len 20 epochs 1000 batch size 128 (loss 0.12)
+El train 7 esta puesto a diversidad 0.8, 1.0 y 1.2, max len 20 epochs 1000 batch size 128 (loss 0.12)
+El train 8 esta puesto a diversidad 1.0 y 1.2, max len 20 epochs 1000 batch size 128 (loss 0.10)
+
+Fin primera tanda
+
+En mi opinión va a ganar la 6, porque presenta mayores rangos de diversidad, pero no muy bajos, que le permiten hilar mejor las palabras, pero sin caer en la repetitividad de la 5 por culpa
+de las conjunciones
+
+El train 6 esta puesto a diversidad 0.5, 0.8, 1.0 y 1.2, max len 20 epochs 1000 batch size 128 (loss 0.12)
+
+Funciones de activación a testear: relu, sigmoid y tanh
+Dropout: 0.2 y 0.1 en capas intermedias DONE
+Capas ocultas: 64, 128 y 256 DONE
+Optimizadores: Adam y sgd DONE
+Batch_size: 64, 128 y 256 DONE
+
+El train 9 esta puesto a diversidad 0.5, 0.8, 1.0 y 1.2, max len 20 epochs 1000 batch size 64 Dropout 0.1 (poemas mas cortos y peor hilados)
+El train 10 esta puesto a diversidad 0.5, 0.8, 1.0 y 1.2, max len 20 epochs 1000 batch size 256 Dropout 0.1 (poemas mas cortos, hilamiento normal)
+El train 11 esta puesto a diversidad 0.5, 0.8, 1.0 y 1.2, max len 20 epochs 1000 batch size 128 Dropout 0.2
+El train XII esta puesto a diversidad 0.5, 0.8, 1.0 y 1.2, max len 20 epochs 1000 batch size 128 Dropout 0.1 capas ocultas 256 se han doblado los parámetros a entrenar, tardará unas 6 horas o más la ejecución da fallo
+El train 12 esta puesto a diversidad 0.5, 0.8, 1.0 y 1.2, max len 20 epochs 1000 batch size 128 Dropout 0.1 capas ocultas 64 se han reducido los parámetros a entrenar pero no a la mitad, sino al 70%, tardará unas 3 horas
+El train 13 esta puesto a diversidad 0.5, 0.8, 1.0 y 1.2, max len 20 epochs 1000 batch size 128 Dropout 0.1 capas ocultas 128 activación sigmoid
+El train XIV esta puesto a diversidad 0.5, 0.8, 1.0 y 1.2, max len 20 epochs 1000 batch size 128 Dropout 0.1 capas ocultas 128 optimizador sgd No consigo que funcione, da fallo durante la ejecución
+El train 14 esta puesto a diversidad 0.5, 0.8, 1.0 y 1.2, max len 20 epochs 1000 batch size 128 Dropout 0.1 capas ocultas 128 activación tanh 
+
+Fin segunda tanda

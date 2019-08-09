@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Manuel Garcia Lopez">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/pe-icons.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/prettyPhoto.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/animate.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='error500.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+    <!--Writing styles-->
+    <link href="https://fonts.googleapis.com/css?family=Architects+Daughter" rel="stylesheet">
+
+    <link rel="icon" href="https://userscontent2.emaze.com/images/3a592f09-d93c-4246-876b-8c81335e8c34/b5268b47-d93a-4ab3-a78f-0359c5e8cdbe.jpg">
+    <link rel="shortcut icon" href="http://cdn.sstatic.net/stackoverflow/img/favicon.ico">
+
+    {% if title %} 
+    <title>{{ title }}</title>
+    {% else %}
+    <title>iPoetry</title>
+    {% endif %}
+
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ url_for('static', filename='images/ico/apple-touch-icon-144x144.png') }}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ url_for('static', filename='images/ico/apple-touch-icon-114x114.png') }}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ url_for('static', filename='images/ico/apple-touch-icon-72x72.png') }}">
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='images/ico/apple-touch-icon-57x57.png') }}">
+
+</head>
+
+<script>
+    $(window).load(function() {
+		$(".se-pre-con").fadeOut("slow");;
+	});
+</script>
+
+<body>
+
+
+    <br><br><br>
+
+    <div class="se-pre-con"></div>
+
+    <main role="main" class="container">
+        <div class="row">
+            <div class="col-md-12">
+                {% with messages = get_flashed_messages(with_categories=true) %} {% if messages%} {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                </div>
+                {% endfor %} {%endif%} {% endwith %} 
+                
+                <div class="container">
+                    <div class="error">
+                        <h1>500</h1>
+                        <h4>Internal server error</h4>
+                        <p>It seems that something went wrong, please go back to the main page. We are working to fix the error as soon as posible ;)</p>
+                    </div>
+                    <div class="stack-container">
+                        <div class="card-container">
+                            <div class="perspec" style="--spreaddist: 125px; --scaledist: .75; --vertdist: -25px;">
+                                <div class="card">
+                                    <div class="writing">
+                                        <div class="topbar">
+                                            <div class="red"></div>
+                                            <div class="yellow"></div>
+                                            <div class="green"></div>
+                                        </div>
+                                        <div class="code">
+                                            <ul>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-container">
+                            <div class="perspec" style="--spreaddist: 100px; --scaledist: .8; --vertdist: -20px;">
+                                <div class="card">
+                                    <div class="writing">
+                                        <div class="topbar">
+                                            <div class="red"></div>
+                                            <div class="yellow"></div>
+                                            <div class="green"></div>
+                                        </div>
+                                        <div class="code">
+                                            <ul>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-container">
+                            <div class="perspec" style="--spreaddist:75px; --scaledist: .85; --vertdist: -15px;">
+                                <div class="card">
+                                    <div class="writing">
+                                        <div class="topbar">
+                                            <div class="red"></div>
+                                            <div class="yellow"></div>
+                                            <div class="green"></div>
+                                        </div>
+                                        <div class="code">
+                                            <ul>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-container">
+                            <div class="perspec" style="--spreaddist: 50px; --scaledist: .9; --vertdist: -10px;">
+                                <div class="card">
+                                    <div class="writing">
+                                        <div class="topbar">
+                                            <div class="red"></div>
+                                            <div class="yellow"></div>
+                                            <div class="green"></div>
+                                        </div>
+                                        <div class="code">
+                                            <ul>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-container">
+                            <div class="perspec" style="--spreaddist: 25px; --scaledist: .95; --vertdist: -5px;">
+                                <div class="card">
+                                    <div class="writing">
+                                        <div class="topbar">
+                                            <div class="red"></div>
+                                            <div class="yellow"></div>
+                                            <div class="green"></div>
+                                        </div>
+                                        <div class="code">
+                                            <ul>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-container">
+                            <div class="perspec" style="--spreaddist: 0px; --scaledist: 1; --vertdist: 0px;">
+                                <div class="card">
+                                    <div class="writing">
+                                        <div class="topbar">
+                                            <div class="red"></div>
+                                            <div class="yellow"></div>
+                                            <div class="green"></div>
+                                        </div>
+                                        <div class="code">
+                                            <ul>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <form action="http://localhost:5000/iPoetry" method="GET">                    
+                        <center>
+                            <input class="btn btn-warning btn-lg" type="submit" value="Go back" id="" />
+                        </center>
+                    </form>
+                  </div>
+            </div>
+        </div>
+    </main>
+
+    <br><br><br>
+
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJ_9ufPdV1Srr2d5KM6_5hOInWi-lhjZo&callback=initMap">
+    </script>
+            
+    <script src="{{ url_for('static', filename='js/plugins.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.prettyPhoto.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/init.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+
+    <script>
+        const stackContainer = document.querySelector('.stack-container');
+        const cardNodes = document.querySelectorAll('.card-container');
+        const perspecNodes = document.querySelectorAll('.perspec');
+        const perspec = document.querySelector('.perspec');
+        const card = document.querySelector('.card');
+
+        let counter = stackContainer.children.length;
+
+        //function to generate random number
+        function randomIntFromInterval(min, max) {
+            return Math.floor(Math.random() * (max - min + 1) + min);
+        }
+
+        //after tilt animation, fire the explode animation
+        card.addEventListener('animationend', function () {
+            perspecNodes.forEach(function (elem, index) {
+                elem.classList.add('explode');
+            });
+        });
+
+        //after explode animation do a bunch of stuff
+        perspec.addEventListener('animationend', function (e) {
+            if (e.animationName === 'explode') {
+                cardNodes.forEach(function (elem, index) {
+
+                    //add hover animation class
+                    elem.classList.add('pokeup');
+
+                    //add event listner to throw card on click
+                    elem.addEventListener('click', function () {
+                        let updown = [800, -800]
+                        let randomY = updown[Math.floor(Math.random() * updown.length)];
+                        let randomX = Math.floor(Math.random() * 1000) - 1000;
+                        elem.style.transform = `translate(${randomX}px, ${randomY}px) rotate(-540deg)`
+                        elem.style.transition = "transform 1s ease, opacity 2s";
+                        elem.style.opacity = "0";
+                        counter--;
+                        if (counter === 0) {
+                            stackContainer.style.width = "0";
+                            stackContainer.style.height = "0";
+                        }
+                    });
+
+                    //generate random number of lines of code between 4 and 10 and add to each card
+                    let numLines = randomIntFromInterval(5, 10);
+
+                    //loop through the lines and add them to the DOM
+                    for (let index = 0; index < numLines; index++) {
+                        let lineLength = randomIntFromInterval(25, 97);
+                        var node = document.createElement("li");
+                        node.classList.add('node-' + index);
+                        elem.querySelector('.code ul').appendChild(node).setAttribute('style', '--linelength: ' + lineLength + '%;');
+
+                        //draw lines of code 1 by 1
+                        if (index == 0) {
+                            elem.querySelector('.code ul .node-' + index).classList.add('writeLine');
+                        } else {
+                            elem.querySelector('.code ul .node-' + (index - 1)).addEventListener('animationend', function (e) {
+                                elem.querySelector('.code ul .node-' + index).classList.add('writeLine');
+                            });
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+
+</body>
+
+</html>

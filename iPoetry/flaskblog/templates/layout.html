@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Manuel Garcia Lopez">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/pe-icons.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/prettyPhoto.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/animate.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+    <!--Writing styles-->
+    <link href="https://fonts.googleapis.com/css?family=Architects+Daughter" rel="stylesheet">
+
+    <link rel="icon" href="https://userscontent2.emaze.com/images/3a592f09-d93c-4246-876b-8c81335e8c34/b5268b47-d93a-4ab3-a78f-0359c5e8cdbe.jpg">
+    <link rel="shortcut icon" href="http://cdn.sstatic.net/stackoverflow/img/favicon.ico">
+
+    {% if title %} 
+    <title>{{ title }}</title>
+    {% else %}
+    <title>iPoetry</title>
+    {% endif %}
+
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ url_for('static', filename='images/ico/apple-touch-icon-144x144.png') }}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ url_for('static', filename='images/ico/apple-touch-icon-114x114.png') }}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ url_for('static', filename='images/ico/apple-touch-icon-72x72.png') }}">
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='images/ico/apple-touch-icon-57x57.png') }}">
+
+</head>
+
+<script>
+    $(window).load(function() {
+		$(".se-pre-con").fadeOut("slow");;
+	});
+</script>
+
+<body>
+        <header class="navbar navbar-inverse navbar-fixed-top " role="banner">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <i class="fa fa-bars"></i>
+                        </button>
+                            <a class="navbar-brand" href="{{ url_for('iPoetry') }}"><h1> <span class="pe-7s-study bounce-in"></span> iPoetry </h1></a>
+                    </div>
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="{{ url_for('iPoetry') }}">Home</a></li>
+                            <li><a href="{{ url_for('generatePoem') }}">Generar poema</a></li>
+                            <li><a href="{{ url_for('publicPoem') }}">Poemas publicados</a></li>
+                            <li><a href="{{ url_for('testtheRNN') }}">Testea la red</a></li>  
+                            <li><a class="nav-item nav-link" href="{{ url_for('eng_home') }}">English</a></li>
+                            <li>
+                                <form action="http://localhost:5000/searchPoem" method="POST">
+                                    <div class="searchbar">
+                                        <input class="search_input" type="text" name="title_field" placeholder="Buscar..." id="search_fields" >
+                                        <button type="submit" ><i class="fa fa-search"></i></button>
+                                    </div>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </header>
+
+    <br><br><br>
+
+    <div class="se-pre-con"></div>
+
+    <main role="main" class="container">
+        <div class="row">
+            <div class="col-md-12">
+                {% with messages = get_flashed_messages(with_categories=true) %} {% if messages%} {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                </div>
+                {% endfor %} {%endif%} {% endwith %} {% block gen %}{% endblock %}
+            </div>
+        </div>
+    </main>
+
+    <br><br><br>
+    
+    <div id="footer-wrapper">
+            <section id="bottom" class="">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-6 about-us-widget">
+                            <h4>Covertura global</h4>
+                            <p>Diseñando el futuro.</p>
+                        </div>
+    
+                        <div class="col-md-4 col-sm-6">
+                            <h4>Compañía</h4>
+                            <div>
+                                <ul class="arrow">
+                                    <li><a href="#carousel-example-generic2">Vista de la compañía</a></li>
+                                    <li><a href="#meet-the-team">Conoce al equipo</a></li>
+                                    <li><a href="#blog">Geniales poemas</a></li>
+                                    <li><a href="#services">Nuestros servicios</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+    
+                        <div class="col-md-4 col-sm-6">
+                            <h4>Ven a vernos</h4>
+                            <address>
+                                <strong>Edificio A3</strong><br>
+                                Avenida Ben Saprut,<br>
+                                Jaén, 23009<br>
+                                <abbr title="Phone"><i class="fa fa-phone"></i></abbr> +34 953 21 32 23
+                            </address>
+                        </div> 
+                    </div>
+                </div>
+            </section>
+    
+            <footer id="footer" class="">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            &copy; 2019 iPoetry. Todos los derechos reservados.
+                        </div>
+                        <div class="col-sm-4">
+                            <ul class="pull-right">
+                                <li><a id="gototop" class="gototop" href="#"><i class="fa fa-chevron-up"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+
+    <script>
+        function initMap() {
+            var coordenadas = {lat: -25.344, lng: 131.036};
+            var map = new google.maps.Map(
+                document.getElementById('map'), {zoom: 4, center: coordenadas});
+            var marker = new google.maps.Marker({position: coordenadas, map: map});
+        }
+    </script>
+
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJ_9ufPdV1Srr2d5KM6_5hOInWi-lhjZo&callback=initMap">
+    </script>
+            
+    <script src="{{ url_for('static', filename='js/plugins.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.prettyPhoto.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/init.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+    <script type="text/javascript">
+        $("#btnPrint").live("click", function() {
+            var divContents = $("#poemBody").html();
+            var printWindow = window.open('', '', 'height=400,width=800');
+            printWindow.document.write(divContents);
+            printWindow.document.close();
+            printWindow.print();
+        });
+
+        //REDIRIGIR A VISTA POEMA
+        $("#btnPoemMachado").live("click", function() {
+            window.location = "http://localhost:5000/poem_machado"
+        });
+    </script>
+    <script type="text/javascript">
+        var countries = ["Argentina", "Chile", "Cuba", "España", "México", "Nicaragua",
+        ];
+        var authors = ["--Autor--", 
+            "Pablo Neruda" /*Chile*/ ,
+            "Jorge Luis Borges", "Julio Cortázar"/*Argentina*/ ,
+            "Lina Zerón" /*Mexico*/ , 
+            "Rubén Darío" /*Nicaragua*/ ,
+            "Jose Martí" /*Cuba*/ ,
+            "Antonio Machado","Duque de Rivas","Federico García Lorca","Francisco de Quevedo",
+            "Gustavo Adolfo Bécquer","Lope de Vega", "Luis Cernuda", 
+            "Luis de Goóngora","Pedro Calderón de la Barca", "Ramón María del Valle-Inclán" /*España*/ 
+        ];
+
+        var relations_coun_auth = [
+            [3], //Argentina
+            [1], //Chile
+            [6], //Cuba
+            [7, 8, 9, 10, 11, 12, 13, 14, 15, 16], //España
+            [4], //Mexico
+            [5] //Nicaragua
+        ]
+
+        function UpdateFields(lang) {
+            if (lang === true) {
+                var _country = document.getElementById("language")
+                $('#author')
+                    .find('option')
+                    .remove()
+                    .end();
+
+                if (_country.selectedIndex >= 0) {
+                    var i;
+                    for (i = 0; i < relations_coun_auth[_country.selectedIndex].length; i++) {
+                        $('#author').append('<option value="' + authors[relations_coun_auth[_country.selectedIndex][i]] + '">' + authors[relations_coun_auth[_country.selectedIndex][i]] + '</option>');
+                    }
+                }
+            } 
+        }
+
+        $("#btnPrint").live("click", function() {
+            var divContents = $("#poemBody").html();
+            var printWindow = window.open('', '', 'height=400,width=800');
+            printWindow.document.write(divContents);
+            printWindow.document.close();
+            printWindow.print();
+        });
+
+        function takeFields(lang) {
+            if (lang === true) {
+                var country = $('#language').find('option')
+                var author = $('#author').find('option')
+                var style = $('#style').find('option')
+                var tipography = $('#tipography').find('option')
+                var name = $('#name').val()
+                var title = $('#title').val()
+            }
+        }
+
+        $("#btnPoem").live("click", function() {
+            window.location = "http://localhost:5000/poem"
+        });
+    </script>
+
+</body>
+
+</html>

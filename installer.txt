@@ -1,0 +1,33 @@
+# Python 3
+
+# Flask & dependencias
+sudo pip install flask
+sudo pip install flask_sqlalchemy
+sudo pip install flask_pymongo
+sudo pip install flask_bcrypt
+sudo pip install flask_login
+
+# Keras
+sudo pip install keras
+
+# Tensorflow
+sudo pip install tensorflow
+
+# Pandas
+sudo pip install pandas
+
+# Matplotlib
+sudo pip install matplotlib
+
+# Sklearn
+sudo pip install sklearn
+
+# Mongo DB
+sudo apt-get install -y mongodb
+
+# Problemas con Mongo
+# 1. Puede ser que no pueda realizar una conexión a la BD
+# 1. Solución -> Ejecutar "sudo mongod" y después lanzar la página web con "python run.py"
+# 
+# 2. No funciona mongod
+# 2. Solución -> Comprobar que existe la carpeta /data/db en el directorio raíz (/ en linux, C:\ en Windows). Si no existe, crearla y volver a arrancar Mongo

@@ -1,0 +1,35 @@
+{% extends "layout.html" %} {% block gen %}
+
+<article id="poemBody">
+    
+    <center>
+        {% for item in poemTitle %}
+        <h1>{{item}}</h1>
+        {% endfor %}
+        <br>
+        <p>
+            {% for item in poem %} 
+            {% if item != '\n' %}
+                {{item}}
+            {% else %}
+                <br>
+            {% endif %}
+            {% endfor %}
+        </p>
+
+        <p>Generado por iPoetry</p>
+
+        <p>Semilla dada por {% for item in author %}
+            <cite>{{item}}</cite> {% endfor %}
+        </p>
+        <p>
+            Poema escrito por iPoetry, una inteligencia artificial sencilla basada en redes neuronales que ha aprendido de leer, palabra a palabra, la obra del autor que has seleccionado ({% for item in escritor %}
+            <quote>{{item}}</quote> {% endfor %}).
+            <br> Trabajo de fin de grado, mayo 2019 - Universidad de Jaén, Escuela Politécnica Superior de Jaén<br>
+        </p>
+        <img src="../static/images/uja.png" width="300" height="150">
+    </center>
+</article>
+<br>
+<center><input class="btn btn-info btn-lg" type="button" value="Descargar en formato PDF" id="btnPrint" /></center>
+<br> {% endblock gen %}

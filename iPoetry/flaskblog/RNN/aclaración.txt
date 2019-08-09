@@ -1,0 +1,8 @@
+Archivos:
+
+antoniomachado.txt -> Modelo de poemas de antonio machado (para entrenar)
+char-lstm.py -> Con el modelo h5 cargado, generar a partir del de antonio machado
+input.txtv -> Archivo de entrenamiento de la red neuronal
+min-char-rnn.py -> entrenamiento de red neuronal (calcula pesos)
+model-char-lstm.h5 -> Modelo a cargar con los pesos <<en formato .h5>>
+model-char-lstm.json -> Modelo a cargar con los pesos <<en formato .json>>

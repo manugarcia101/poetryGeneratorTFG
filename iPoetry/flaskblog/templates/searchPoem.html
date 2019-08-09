@@ -1,0 +1,39 @@
+{% extends "layout.html" %} {% block gen %}
+
+<div class="item active">
+    <div class="center gap fade-show section-heading">
+        <h1 class="main-title">Poemas encontrados</h1>
+    </div>
+</div>
+
+<section id="portfolio">
+    <div class="container-fluid p-0">
+        <div class="row no-gutters">
+            {% for item in search %}
+            <div class="col-lg-4 col-sm-6">
+                <a class="portfolio-box" href="{{ url_for('static', filename='images/poetry_plume.jpg') }}" width="300px" height="300px">
+                <img class="img-fluid" src="{{ url_for('static', filename='images/poetry_plume.jpg') }}" alt="" width="300px" height="300px">
+                <div class="portfolio-box-caption">
+                    <div class="project-category text-white-50">
+                        <h2>{{item['Title']}}</h2>
+                    </div>
+                    <div class="project-name text-white-50" style="font-family: 'Architects Daughter', cursive;">
+                        <h5>
+                            {% for i in item['Poem'] %}
+                                {% if i != '\n' %}
+                                    {{i}}
+                                {% else %}
+                                    <br>
+                                {% endif %}
+                            {% endfor %}
+                        </h5>
+                    </div>
+                </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<br> {% endblock gen %}

@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Manuel Garcia Lopez">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/custom.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/pe-icons.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/prettyPhoto.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/animate.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+    integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+    crossorigin=""/>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+    integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+    crossorigin=""></script>
+
+    <!--Writing styles-->
+    <link href="https://fonts.googleapis.com/css?family=Architects+Daughter" rel="stylesheet">
+
+    <link rel="icon" href="https://userscontent2.emaze.com/images/3a592f09-d93c-4246-876b-8c81335e8c34/b5268b47-d93a-4ab3-a78f-0359c5e8cdbe.jpg">
+    <link rel="shortcut icon" href="http://cdn.sstatic.net/stackoverflow/img/favicon.ico">
+
+    {% if title %} 
+    <title>{{ title }}</title>
+    {% else %}
+    <title>iPoetry</title>
+    {% endif %}
+
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ url_for('static', filename='images/ico/apple-touch-icon-144x144.png') }}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ url_for('static', filename='images/ico/apple-touch-icon-114x114.png') }}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ url_for('static', filename='images/ico/apple-touch-icon-72x72.png') }}">
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='images/ico/apple-touch-icon-57x57.png') }}">
+</head>
+
+<body>
+    <header class="navbar navbar-inverse navbar-fixed-top " role="banner">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <i class="fa fa-bars"></i>
+                </button>
+                    <a class="navbar-brand" href="{{ url_for('iPoetry') }}"><h1> <span class="pe-7s-study bounce-in"></span> iPoetry </h1></a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{{ url_for('iPoetry') }}">Home</a></li>
+                    <li><a href="{{ url_for('generatePoem') }}">Generar poema</a></li>
+                    <li><a href="{{ url_for('publicPoem') }}">Poemas publicados</a></li> 
+                    <li><a href="{{ url_for('testtheRNN') }}">Testea la red</a></li>
+                    <li><a class="nav-item nav-link" href="{{ url_for('eng_home') }}">English</a></li>
+                    <li>
+                        <form action="http://localhost:5000/searchPoem" method="POST">
+                            <div class="searchbar">
+                                <input class="search_input" type="text" name="title_field" placeholder="Buscar..." id="search_fields" >
+                                <button type="submit" ><i class="fa fa-search"></i></button>
+                            </div>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <div id="carousel-example-generic2" class="carousel slide carousel-fade carousel-fullscreen" data-ride="carousel">
+        <div class="carousel-inner" >
+            <div class="carousel-item" style="background-image: url('../static/images/bg/bg3.jpg');">
+                <div class="overlay"></div>
+                <div class="carousel-caption">
+                    <div class="carousel-content center centered">
+                        <h2 class="boxed animation animated-item-1 fade-down"><br><br><br>VAMOS A AYUDARTE A CREAR POESÍA DE FORMA FÁCIL Y SENCILLA</h2>
+                        <p class="boxed animation animated-item-2 fade-up">Te ayudaremos a realizar tu propia creaci&oacute;n sin problema alguno.</p>
+                        <br>
+                        <a class="btn btn-secondary btn-lg btn-block" href="#services">Saber m&aacute;s</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="content-wrapper">
+            <section id="services" class="white">
+                <div class="container">
+                <div class="gap"></div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="center gap fade-down section-heading">
+                                <h2 class="main-title">¿Qu&eacute; hacemos?</h2>
+                                <hr>
+                                <p>Generamos una "poes&iacute;a" al estilo de tu autor favorito. No es gran cosa, pero es divertido.</p>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="row">
+                        <div class="col-md-4 col-sm-6">
+                            <div class="service-block">
+                                <div class="pull-left bounce-in">
+                                    <i class="fa fa-pencil fa fa-md"></i>
+                                </div>
+                                <div class="media-body fade-up">
+                                    <h3 class="media-heading">Te damos un poco de inspiración</h3>
+                                    <p>Te ofrecemos una serie de autores en base a su país de origen, y te damos una serie de aspectos a elegir.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="service-block">
+                                <div class="pull-left bounce-in">
+                                    <i class="fa fa-cogs fa fa-md"></i>
+                                </div>
+                                <div class="media-body fade-up">
+                                    <h3 class="media-heading">Procesamos tu elección</h3>
+                                    <p>Gracias a nuestro software, procesamos tu petición en base al estilo de escritura de autor y parámetros seleccionados.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="service-block">
+                                <div class="pull-left bounce-in">
+                                    <i class="fa fa-camera-retro fa fa-md"></i>
+                                </div>
+                                <div class="media-body fade-up">
+                                    <h3 class="media-heading">Añadimos una fotografía</h3>
+                                    <p>Añadimos una fotografía relacionada con la poesía, a fin de darle un toque de personalidad.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gap"></div>
+                    <div class="row">
+                        <div class="col-md-4 col-sm-6">
+                            <div class="service-block">
+                                <div class="pull-left bounce-in">
+                                    <i class="fa fa-database fa fa-md"></i>
+                                </div>
+                                <div class="media-body fade-up">
+                                    <h3 class="media-heading">Guardamos en nuestra base de datos</h3>
+                                    <p>Guardamos tu poema en nuestra base de datos, para que luego sirva de inspiración a otros usuarios.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="service-block">
+                                <div class="pull-left bounce-in">
+                                    <i class="fa fa-paper-plane fa fa-md"></i>
+                                </div>
+                                <div class="media-body fade-up">
+                                    <h3 class="media-heading">Facilidad de descarga</h3>
+                                    <p>Te damos la opción de imprimir el poema, a fin de que puedas tener un recuerdo de esta pequeña experiencia :).</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="service-block">
+                                <div class="pull-left bounce-in">
+                                    <i class="fa fa-user fa fa-md"></i>
+                                </div>
+                                <div class="media-body fade-up">
+                                    <h3 class="media-heading">Información sobre los autores</h3>
+                                    <p>Además, puedes consultar en todo momento, información relativa a cada uno de los autores que tenemos disponbles.</p>
+                                </div>
+                            </div>
+                        </div>  
+                    </div>
+                </div>
+                <div class="gap"></div>
+                
+            </section>
+    
+    
+            <section id="single-quote" class="divider-section">
+                    <div class="container">
+                        <div class="gap"></div>
+                        <div class="row">
+                            <div class='col-md-offset-2 col-md-8 fade-up'>
+                                <div class="carousel slide" data-ride="carousel" id="quote-carousel">
+                                    <div class="carousel-inner">
+                                        <div class="item active">
+                                            <blockquote>
+                                                <div class="row">
+                                                    <div class="col-sm-3 text-center">
+                                                        <img class="img-responsive" src="{{ url_for('static', filename='images/team/becquer.jpg') }}" style="width: 100px;height:100px;">
+                                                    </div>
+                                                    <div class="col-sm-9">
+                                                        <p>El recuerdo que deja un libro, es más importante que el libro mismo.</p>
+                                                        <small>Gustavo Adolfo Bécquer</small>
+                                                    </div>
+                                                </div>
+                                            </blockquote>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="gap"></div>
+                      </div>
+              </section>
+    
+            <section id="about-us" class="white">
+                <div class="container">
+                    <div class="gap"></div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="center gap fade-down section-heading">
+                                <h2 class="main-title">Un poco sobre nuestro proyecto</h2>
+                                <hr>
+                                <p>Poesía que sin ser auténtica poesía, lo parece.</p>
+                            </div>
+                        </div>
+                    </div>
+                   <div class="gap"></div>
+                    <div class="row fade-up">
+                        <div class="col-md-6">
+                              <div class="testimonial-list-item">
+                            <img class="pull-left img-responsive quote-author-list" src="{{ url_for('static', filename='images/team/tolstoi.jpg') }}" style=" height: 80px;">
+                                <blockquote>
+                                    <p>Si buscas la perfección, nunca estarás contento.</p>
+                                    <small>Leo Tolstoi, <cite title="Source Title">Anna Karenina</cite></small>
+                                </blockquote>
+                            </div>
+                            <div class="testimonial-list-item">
+                            <img class="pull-left img-responsive quote-author-list" src="{{ url_for('static', filename='images/team/paulo.jpg') }}">
+                                <blockquote>
+                                    <p>Seas quien seas, hagas lo que hagas, cuando deseas con firmeza alguna cosa es porque este deseo nació en el alma del universo. Es tu misión en la tierra.</p>
+                                    <small>Paulo Coelho, <cite title="Source Title">El alquimista</cite></small>
+                                </blockquote>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="testimonial-list-item">
+                            <img class="pull-left img-responsive quote-author-list" src="{{ url_for('static', filename='images/team/dan.jpg') }}">
+                                <blockquote>
+                                    <p>El hombre llega mucho más lejos para evitar lo que teme que para alcanzar lo que desea.</p>
+                                    <small>Dan Brown, <cite title="Source Title">El Código da Vinci</cite></small>
+                                </blockquote>
+                            </div>
+                            <div class="testimonial-list-item">
+                            <img class="pull-left img-responsive quote-author-list" src="{{ url_for('static', filename='images/team/antoine.jpg') }}">
+                                <blockquote>
+                                    <p>Cuando te hayas consolado, te alegrarás de haberme conocido.</p>
+                                    <small>Antoine de Saint-Exupèry, <cite title="Source Title">El principito</cite></small>
+                                </blockquote>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="gap"></div>
+                    <div class="center gap fade-down section-heading">
+                        <h2 class="main-title">Equipo de desarrollo</h2>
+                        <hr>
+                        <p>Componenetes del equipo</p>
+                    </div>
+                    <div class="gap"></div>
+    
+                    <div id="meet-the-team" class="row">
+                        <div class="col-md-6 col-xs-6">
+                            <div class="center team-member">
+                                <div class="team-image">
+                                    <img class="img-responsive img-thumbnail bounce-in" src="{{ url_for('static', filename='images/1701.JPG') }}" alt="" width="300px" height="500px">
+                                    <div class="overlay">
+                                        <a class="preview btn btn-outlined btn-primary" href="{{ url_for('static', filename='images/1701.JPG') }}" width="300px" height="500px" rel="prettyPhoto"><i class="fa fa-eye"></i></a>
+                                    </div>
+                                </div>
+                                <div class="team-content fade-up">
+                                    <h5>Manuel García López<small class="role muted">Diseñador web</small></h5>
+                                    <p>No es más rico el que más tiene sino el que menos necesita.</p>
+                                    <a class="btn btn-social btn-facebook" href="#"><i class="fa fa-facebook"></i></a> <a class="btn btn-social btn-google-plus" href="#"><i class="fa fa-google-plus"></i></a> <a class="btn btn-social btn-twitter" href="#"><i class="fa fa-twitter"></i></a> <a class="btn btn-social btn-linkedin" href="#"><i class="fa fa-linkedin"></i></a>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div class="col-md-6 col-xs-6">
+                            <div class="center team-member">
+                                <div class="team-image">
+                                    <img class="img-responsive img-thumbnail bounce-in" src="{{ url_for('static', filename='images/user.png') }}" alt="" width="300px" height="500px">
+                                    <div class="overlay">
+                                        <a class="preview btn btn-outlined btn-primary" href="{{ url_for('static', filename='images/user.png') }}" width="300px" height="500px" rel="prettyPhoto"><i class="fa fa-eye"></i></a>
+                                    </div>
+                                </div>
+                                <div class="team-content fade-up">
+                                    <h5>Arturo Montejo Ráez<small class="role muted">Jefe del proyecto</small></h5>
+                                    <p>La importancia de las aplicaciones no radican en las funciones que proporcionan, sino en el valor de la información que poseen.</p>
+                                    <a class="btn btn-social btn-facebook" href="#"><i class="fa fa-facebook"></i></a> <a class="btn btn-social btn-google-plus" href="#"><i class="fa fa-google-plus"></i></a> <a class="btn btn-social btn-twitter" href="#"><i class="fa fa-twitter"></i></a> <a class="btn btn-social btn-linkedin" href="#"><i class="fa fa-linkedin"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gap"></div>
+                    <div class="gap"></div>
+                </div>
+            </section>
+    
+            <section id="stats" class="divider-section">
+                <div class="gap"></div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3 col-xs-6">
+                            <div class="center bounce-in">
+                                <span class="stat-icon"><span class="pe-7s-timer bounce-in"></span></span>
+                                <h1><span class="counter">2</span></h1>
+                                <h3>Lenguas disponibles</h3>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-xs-6">
+                            <div class="center bounce-in">
+                                <span class="stat-icon"><span class="pe-7s-light bounce-in"></span></span>
+                                <h1><span class="counter">115</span></h1>
+                                <h3>Autores disponibles</h3>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-xs-6">
+                            <div class="center bounce-in">
+                                <span class="stat-icon"><span class="pe-7s-graph1 bounce-in"></span></span>
+                                <h1><span class="counter">135600</span></h1>
+                                <h3>Versos de entrenamiento</h3>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-xs-6">
+                            <div class="center bounce-in">
+                                <span class="stat-icon"><span class="pe-7s-box2 bounce-in"></span></span>
+                                <h1><span class="counter"> 349 </span></h1>
+                                <h3>Poemas generados</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="gap"></div>
+            </section>
+    
+            <section id="portfolio" class="white">
+                   <div class="container">
+                    <div class="gap"></div>
+                        <div class="center gap fade-down section-heading">
+                            <h2 class="main-title">Ejemplos de tipos de poemas</h2>
+                        </div>
+                        <ul class="portfolio-filter fade-down center">
+                            <li><a class="btn btn-outlined btn-primary active" href="#" data-filter="*">Todos</a></li>
+                            <li><a class="btn btn-outlined btn-primary" href="#" data-filter=".apps">Amor</a></li>
+                            <li><a class="btn btn-outlined btn-primary" href="#" data-filter=".nature">Naturaleza</a></li>
+                            <li><a class="btn btn-outlined btn-primary" href="#" data-filter=".design">Amigables</a></li>
+                        </ul>
+    
+                        <ul class="portfolio-items col-3 isotope fade-up">
+                            <li class="portfolio-item apps isotope-item">
+                                <div class="item-inner">
+                                    <img src="{{ url_for('static', filename='images/portfolio/folio01.jpg') }}" alt="">
+                                    <h5>Poemas de felicidad</h5>
+                                    <div class="overlay">
+                                        <a class="preview btn btn-outlined btn-primary" href="{{ url_for('static', filename='images/portfolio/folio01.jpg') }}" rel="prettyPhoto"><i class="fa fa-eye"></i></a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="portfolio-item joomla nature isotope-item">
+                                <div class="item-inner">
+                                    <img src="{{ url_for('static', filename='images/portfolio/folio02.jpg') }}" alt="">
+                                    <h5>Poemas de comida</h5>
+                                    <div class="overlay">
+                                        <a class="preview btn btn-outlined btn-primary" href="{{ url_for('static', filename='images/portfolio/folio02.jpg') }}" rel="prettyPhoto"><i class="fa fa-eye"></i></a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="portfolio-item bootstrap design isotope-item">
+                                <div class="item-inner">
+                                    <img src="{{ url_for('static', filename='images/portfolio/folio03.jpg') }}" alt="">
+                                    <h5>Poemas de informáticos</h5>
+                                    <div class="overlay">
+                                        <a class="preview btn btn-outlined btn-primary" href="{{ url_for('static', filename='images/portfolio/folio03.jpg') }}" rel="prettyPhoto"><i class="fa fa-eye"></i></a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="portfolio-item joomla design apps isotope-item">
+                                <div class="item-inner">
+                                    <img src="{{ url_for('static', filename='images/portfolio/folio04.jpg') }}" alt="">
+                                    <h5>Poemas de naturaleza</h5>
+                                    <div class="overlay">
+                                        <a class="preview btn btn-outlined btn-primary" href="{{ url_for('static', filename='images/portfolio/folio04.jpg') }}" rel="prettyPhoto"><i class="fa fa-eye"></i></a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="portfolio-item joomla apps isotope-item">
+                                <div class="item-inner">
+                                    <img src="{{ url_for('static', filename='images/portfolio/folio05.jpg') }}" alt="">
+                                    <h5>Poemas de desastres</h5>
+                                    <div class="overlay">
+                                        <a class="preview btn btn-outlined btn-primary" href="{{ url_for('static', filename='images/portfolio/folio05.jpg') }}" rel="prettyPhoto"><i class="fa fa-eye"></i></a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="portfolio-item wordpress nature isotope-item">
+                                <div class="item-inner">
+                                    <img src="{{ url_for('static', filename='images/portfolio/folio06.jpg') }}" alt="">
+                                    <h5>Poemas de sueños</h5>
+                                    <div class="overlay">
+                                        <a class="preview btn btn-outlined btn-primary" href="{{ url_for('static', filename='images/portfolio/folio06.jpg') }}" rel="prettyPhoto"><i class="fa fa-eye"></i></a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="portfolio-item joomla design apps isotope-item">
+                                <div class="item-inner">
+                                    <img src="{{ url_for('static', filename='images/portfolio/folio07.jpg') }}" alt="">
+                                    <h5>Poemas de esperanza</h5>
+                                    <div class="overlay">
+                                        <a class="preview btn btn-outlined btn-primary" href="{{ url_for('static', filename='images/portfolio/folio07.jpg') }}" rel="prettyPhoto"><i class="fa fa-eye"></i></a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="portfolio-item joomla nature isotope-item">
+                                <div class="item-inner">
+                                    <img src="{{ url_for('static', filename='images/portfolio/folio08.jpg') }}" alt="">
+                                    <h5>Poemas de amistad</h5>
+                                    <div class="overlay">
+                                        <a class="preview btn btn-outlined btn-primary" href="{{ url_for('static', filename='images/portfolio/folio08.jpg') }}" rel="prettyPhoto"><i class="fa fa-eye"></i></a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="portfolio-item wordpress design isotope-item">
+                                <div class="item-inner">
+                                    <img src="{{ url_for('static', filename='images/portfolio/folio09.jpg') }}" alt="">
+                                    <h5>Poemas de amor</h5>
+                                    <div class="overlay">
+                                        <a class="preview btn btn-outlined btn-primary" href="{{ url_for('static', filename='images/portfolio/folio09.jpg') }}" rel="prettyPhoto"><i class="fa fa-eye"></i></a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+    
+                <section id="testimonial-carousel" class="divider-section">
+                <div class="gap"></div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="center gap fade-down section-heading">
+                                <h2 class="main-title">Parte de nuestra filosofía</h2>
+                                <div class="gap"></div>
+                            </div>
+                            <div class='col-md-offset-2 col-md-8 fade-up'>
+                                <div class="carousel slide" data-ride="carousel" id="quote-carousel">
+                                    <ol class="carousel-indicators">
+                                        <li data-target="#quote-carousel" data-slide-to="0" class="active"></li>
+                                        <li data-target="#quote-carousel" data-slide-to="1"></li>
+                                    </ol>
+                                    <div class="carousel-inner">
+                                        <div class="item active">
+                                            <blockquote>
+                                                <div class="row">
+                                                    <div class="col-sm-3 text-center">
+                                                        <img class="img-responsive" src="{{ url_for('static', filename='images/user.png') }}" style="width: 100px;height:100px;">
+                                                    </div>
+                                                    <div class="col-sm-9">
+                                                        <p>La paciencia es la fortaleza del débil, y la impaciencia la debilidad del fuerte.</p>
+                                                        <small>Kant</small>
+                                                    </div>
+                                                </div>
+                                            </blockquote>
+                                        </div>
+                                        <div class="item">
+                                            <blockquote>
+                                                <div class="row">
+                                                    <div class="col-sm-3 text-center">
+                                                        <img class="img-responsive" src="{{ url_for('static', filename='images/1701.JPG') }}" style="width: 100px;height:100px;">
+                                                    </div>
+                                                    <div class="col-sm-9">
+                                                        <p>No podemos elegir los tiempos que nos toca vivir, solo podemos decidir que hacer con el tiempo que se nos ha dado.</p>
+                                                        <small>Gandalf</small>
+                                                    </div>
+                                                </div>
+                                            </blockquote>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="gap"></div>
+                      </div>
+                  </section>
+    
+                <section id="blog" class="white">
+                    <div class="container">
+                        <div class="center gap fade-down section-heading">
+                               <div class="gap"></div>
+                            <h2 class="main-title">Ejemplos de poemas</h2>
+                        </div>
+                        <div class="gap"></div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="post">
+                                    <div class="post-img-content">
+                                        <img src="{{ url_for('static', filename='images/portfolio/folio02.jpg') }}" class="img-responsive" />
+                                        <div class="overlay">
+                                            <a class="preview btn btn-outlined btn-primary" href="#"><i class="fa fa-link"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="content">
+                                        <h2 class="post-title">Anónimo</h2>
+                                        <div class="author">
+                                            <i class="fa fa-user"></i> By <b>Anónimo</b> | <i class="fa fa-clock-o"></i> <time datetime="2014-01-20">Abril 16th, 2019</time>
+                                        </div>
+                                        <div>
+                                            prueba del entrenamiento 8 todos los amores que llegaron al alma al hondo cielo y ha de morir contigo la tierra de la laguna de la tierra de sin que de de la nube el que el que en la tierra y a una noche de las abiertas y
+
+                                            contigo la codicia de la misión guardan de alvargonzález que que al par que que de de las de mago que ha de la tierra la tierra de alvargonzález y
+
+                                            contigo el hada la laguna de la buena que ha de alvargonzález a la tierra la tierra de la mano claras
+
+                                            contigo a la laguna de la la mano la tarde de la tierra ha labrado en los pies y es la una aldea la aldea fué de
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="post">
+                                    <div class="post-img-content">
+                                        <img src="{{ url_for('static', filename='images/portfolio/folio06.jpg') }}" class="img-responsive" />
+                                        <div class="overlay">
+                                            <a class="preview btn btn-outlined btn-primary" href="#"><i class="fa fa-link"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="content">
+                                        <h2 class="post-title">Hort</h2>
+                                        <div class="author">
+                                            <i class="fa fa-user"></i> By <b>Hort</b> | <i class="fa fa-clock-o"></i> <time datetime="2014-01-20">Mayo 07th, 2019</time>
+                                        </div>
+                                        <div>
+                                            hort hort hort el arado un mastín y cien ovejas otros días
+
+                                            me ojos a lo me sueños de la mano y en la tarde en el sol el que la tarde que y la tierra de la tierra se lejos en los cristales castigo
+
+                                            me ojos a lo me sueños de la mano y en la tarde en el palpitar entre mi recuerdo y la tarde y en la memoria terciopelo galerías
+
+                                            me ojos a lo nidos la tarde en en la en la tarde en en de la mano iv las hadas de la y la tierra de la tierra
+
+                                            me ojos a lo me recuerdo esta me a a la tierra y la tarde en la luz en la mano en una en la en en la nube xiv el es una noche de la tierra y la
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="post">
+                                    <div class="post-img-content">
+                                        <img src="{{ url_for('static', filename='images/portfolio/folio11.jpg') }}" class="img-responsive" />
+                                        <div class="overlay">
+                                            <a class="preview btn btn-outlined btn-primary" href="#"><i class="fa fa-link"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="content">
+                                        <h2 class="post-title">Quetzal</h2>
+                                        <div class="author">
+                                            <i class="fa fa-user"></i> By <b>Quetzal</b> | <i class="fa fa-clock-o"></i> <time datetime="2014-01-20">Junio 1st, 2019</time>
+                                        </div>
+                                        <div>
+                                            erase una vez acude el menor y enciende bajo la negra campana de la cocina una hoguera fué y la memoria como un titerero como tocados de mis de un día y una noche del campo y el aire de sus harapos en los campos de los campos las tierras del que en los cristales
+
+                                            hoguera y los claros blancos tan y era un día o las hermanos de alvargonzález para los poetas de un día con su tonel y el segundo de un fulgor cerca de rosa el
+
+                                            hoguera teme entre los ojos con su corazón no han de los campos y el huso de abril en el agua se despierta que cuánto cuando una llama de la tierra y el lino que las márgenes son y fué de olivos
+
+                                            ciudad al primavera la voz parda de alvargonzález que el verde nuevo de los magas la elegancia que todo mustio renacimiento a la laguna y el 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="gap"></div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="post">
+                                    <div class="post-img-content">
+                                        <img src="{{ url_for('static', filename='images/portfolio/folio02.jpg') }}" class="img-responsive" />
+                                        <div class="overlay">
+                                            <a class="preview btn btn-outlined btn-primary" href="#"><i class="fa fa-link"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="content">
+                                        <h2 class="post-title">Nenúfares azules</h2>
+                                        <div class="author">
+                                            <i class="fa fa-user"></i> By <b>Emacs</b> | <i class="fa fa-clock-o"></i> <time datetime="2014-01-20">Abril 10th, 2019</time>
+                                        </div>
+                                        <div>
+                                            de mi vida gastadas alguien dirá perdidas en meditar sobre los enigmas del hombre y del río las las de las márgenes y las blancas hayas un hombre que se apaga y es la tierra de alvargonzález y es una noche de caín
+
+                                            que sin de abril es las blancas de los hálitos hoy es el campo y el toro que así en el tranquilo y en el campo iii una de
+
+                                            de un del blanco xxi iii miguel de alvargonzález están ni florido de de los galgos las las cumbres del huerto en su capa para el alba de un claro se oía y un fantasma que me no el espejo
+
+                                            río aquella las campos sin y aventurero de los dorada que dices risueña el lar de la luz y el campo y las doncellas verdes casas que abre a mi 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="post">
+                                    <div class="post-img-content">
+                                        <img src="{{ url_for('static', filename='images/portfolio/folio06.jpg') }}" class="img-responsive" />
+                                        <div class="overlay">
+                                            <a class="preview btn btn-outlined btn-primary" href="#"><i class="fa fa-link"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="content">
+                                        <h2 class="post-title">El sol azul</h2>
+                                        <div class="author">
+                                            <i class="fa fa-user"></i> By <b>Google</b> | <i class="fa fa-clock-o"></i> <time datetime="2014-01-20">Mayo 05th, 2019</time>
+                                        </div>
+                                        <div>
+                                            devanando los hilos del hastío y la tristeza cuando llegó a mi oído por el corazón que me a las las blancos del huerto con sus son hacia en el azul la la luna de los campos al hondo de las cigüeñas sobre un día y adalides de los huertos quiere el fantasma de soria al agua sobre los campos
+
+                                            el cielo que en la laguna cuervos el los verdes la piedra de alvargonzález con donde las campanas en su era es la laguna de un de esas se pierde por al
+
+                                            el huerto en un día y en la tarde que os no que se apaga vi los hijos del sueño que en sueños iii es los jardines y su sol de campo
+
+                                            el día de hombre que me la casa y la nueva de su mano del oro y la oro y garras que me al ramaje como o el de las blancas que un hombre que en los asesinos los poetas del ramaje 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="post">
+                                    <div class="post-img-content">
+                                        <img src="{{ url_for('static', filename='images/portfolio/folio11.jpg') }}" class="img-responsive" />
+                                        <div class="overlay">
+                                            <a class="preview btn btn-outlined btn-primary" href="#"><i class="fa fa-link"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="content">
+                                        <h2 class="post-title">Rosas rojas</h2>
+                                        <div class="author">
+                                            <i class="fa fa-user"></i> By <b>Soap</b> | <i class="fa fa-clock-o"></i> <time datetime="2014-01-20">Marzo 09th, 2019</time>
+                                        </div>
+                                        <div>
+                                            de julio bajo el sol de fuego a un paso de la abierta sepultura
+
+                                            y los montes de mi quiere en su mano que un día con más de estos de una de valencia él el alma que se apaga nadie un día en el corazón de mi ventana la
+
+                                            y los montes de mi y tras de piedra el viejo duero que al borde de oro que en el campanario que que el campo se estrecha que se a la tierra en los cristales la
+
+                                            que los montes de mi cual su adiós que en un nuevo que al agua como los amores como un día cuando al aire que el mar es limonero de las márgenes de verano un de reír calvas un viejo de santa
+
+                                            y las campanas de la tierra al guerra una una rosa oh de las ascuas un hombre que tienen las márgenes mares entre los claros del campo la tierra que sobre la casa las las asesinos de los 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   </section>
+
+                <div id = 'map'></div>
+    
+                <section id="contact" class="white">
+                    <div class="container">
+                        <div class="gap"></div>
+                        <div class="center gap fade-down section-heading">
+                            <h2 class="main-title">Contacto</h2>
+                        </div>
+                        <div class="gap"></div>
+                        <div class="row">
+                            <div class="col-md-12 fade-up">
+                                <h3>Información de contacto</h3>
+                                <p><span class="icon icon-home"></span>Campus de las lagunillas, Jaén<br/>
+                                    <span class="icon icon-phone"></span>+34 953 213 223<br/>
+                                    <span class="icon icon-mobile"></span>+34 953 213 223<br/>
+                                    <span class="icon icon-envelop"></span> <a href="#">secretaria@ujaen.com</a> <br/>
+                                    <span class="icon icon-twitter"></span> <a href="#">@ujateam.com</a> <br/>
+                                    <span class="icon icon-facebook"></span> <a href="#">Uja.</a> <br/>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="gap"></div>
+                    </div>
+                </section>
+            </div>
+    
+        <div id="footer-wrapper">
+            <section id="bottom" class="">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-6 about-us-widget">
+                            <h4>Covertura global</h4>
+                            <p>Diseñando el futuro.</p>
+                        </div>
+    
+                        <div class="col-md-4 col-sm-6">
+                            <h4>Compañía</h4>
+                            <div>
+                                <ul class="arrow">
+                                    <li><a href="#carousel-example-generic2">Vista de la compañía</a></li>
+                                    <li><a href="#meet-the-team">Conoce al equipo</a></li>
+                                    <li><a href="#blog">Geniales poemas</a></li>
+                                    <li><a href="#services">Nuestros servicios</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+    
+                        <div class="col-md-4 col-sm-6">
+                            <h4>Ven a vernos</h4>
+                            <address>
+                                <strong>Edificio A3</strong><br>
+                                Avenida Ben Saprut,<br>
+                                Jaén, 23009<br>
+                                <abbr title="Phone"><i class="fa fa-phone"></i></abbr> +34 953 21 32 23
+                            </address>
+                        </div> 
+                    </div>
+                </div>
+            </section>
+    
+            <footer id="footer" class="">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            &copy; 2019 iPoetry. Todos los derechos reservados.
+                        </div>
+                        <div class="col-sm-4">
+                            <ul class="pull-right">
+                                <li><a id="gototop" class="gototop" href="#"><i class="fa fa-chevron-up"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+
+    <script>
+        function initMap() {
+            var coordenadas = {lat: -25.344, lng: 131.036};
+            var map = new google.maps.Map(
+                document.getElementById('map'), {zoom: 4, center: coordenadas});
+            var marker = new google.maps.Marker({position: coordenadas, map: map});
+        }
+    </script>
+            
+    <script src="{{ url_for('static', filename='js/plugins.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.prettyPhoto.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/init.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript">
+        $("#btnPrint").live("click", function() {
+            var divContents = $("#poemBody").html();
+            var printWindow = window.open('', '', 'height=400,width=800');
+            printWindow.document.write(divContents);
+            printWindow.document.close();
+            printWindow.print();
+        });
+
+        $("#btnPoemMachado").live("click", function() {
+            window.location = "http://localhost:5000/poem_machado"
+        });
+        var map = L.map('map').setView([37.76, -3.77], 11);
+    
+        L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
+            maxZoom: 18,
+            subdomains: ['a','b','c']
+        }).addTo(map);
+        L.control.scale().addTo(map);
+    </script>
+</body>
+
+</html>

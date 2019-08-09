@@ -1,0 +1,126 @@
+{% extends "eng_layout.html" %} {% block gen %}
+<div class="item active">
+    <div class="center gap fade-show section-heading">
+        <h1 class="main-title">Try some examples of our neural networks</h1>
+    </div>
+</div>
+
+<section id="portfolio">
+        <div class="container-fluid p-0">
+            <div class="row no-gutters">
+                    <div class="col-lg-6 col-sm-6">
+                        <a class="portfolio-box" href="{{ url_for('static', filename='images/poetry_plume.jpg') }}" alt="" width="400px" height="400px">
+                        <img class="img-fluid" src="{{ url_for('static', filename='images/poetry_plume.jpg') }}" alt="" width="400px" height="400px" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="project-category text-white-50">
+                                    <h2>Char neural network 1 Antonio Machado </h2>
+                                    <h5>Params: Diversity (0.2, 0.5, 1.0, 1.2), epochs 200, activation softmax</h5>
+                            </div>
+                            <br>
+                            <div class="project-name text-white-50" style="font-family: 'Architects Daughter', cursive;">
+                                <h5>
+                                        ya ocultan los viajeros que cabalgan su acambre gentir parece que en el solilo historto el dum. ve las rosas rodas redos del contello esciba ormada; 
+                                        esmañan el alma del pato sombre el mayo, y de la tierra de una se para. ¡o y alguito el demor y el reca.a. 
+                                        za de la fuente la al enta de la nueva en la agierto la ala casados, pata la luna, la buena corrar de valles, persegdes de eslutarancas, y a entr 
+                                </h5>
+                            </div>
+                            <br>
+                            <form action="http://localhost:5000/eng_RNN1" method="POST">                    
+                                <center>
+                                    <input class="btn btn-warning btn-lg" type="submit" value="Try neural network" id="" />
+                                </center>
+                            </form>
+                        </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-6 col-sm-6">
+                        <a class="portfolio-box" href="{{ url_for('static', filename='images/poetry_plume.jpg') }}" alt="" width="400px" height="400px">
+                        <img class="img-fluid" src="{{ url_for('static', filename='images/poetry_plume.jpg') }}" alt="" width="400px" height="400px" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="project-category text-white-50">
+                                    <h2>Char neural network 2 Antonio Machado </h2>
+                                    <h5>Params: Diversity (0.5, 0.8, 1.0, 1.2), epochs 500, activation sigmoid</h5>
+                            </div>
+                            <br>
+                            <div class="project-name text-white-50" style="font-family: 'Architects Daughter', cursive;">
+                                <h5>
+                                        o una encina casta, en tierra de tomil que pabras flota por el raontil, biene. que cantanosco de la pierta un palaba. la barierta siera en mengudo, de guielas las ovasias, 
+                                        farte todos la grascada varanas viejas, vueltande las calinas como atóúlido en mesppál —nacha comomosante, tano al alma. el sin colo cortembla blanca... al alda cuando 
+                                        trajaquela con mus mudas de valle otra vez los trenejas hojas miles, 
+                                </h5>
+                            </div>
+                            <br>
+                            <form action="http://localhost:5000/eng_RNN2" method="POST">                    
+                                <center>
+                                    <input class="btn btn-warning btn-lg" type="submit" value="Try neural network" id="" />
+                                </center>
+                            </form>
+                        </div>
+                        </a>
+                    </div>
+            </div>
+        </div>
+        <div class="container-fluid p-0">
+                <div class="row no-gutters">
+                        <div class="col-lg-6 col-sm-6">
+                            <a class="portfolio-box" href="{{ url_for('static', filename='images/poetry_plume.jpg') }}" alt="" width="400px" height="400px">
+                            <img class="img-fluid" src="{{ url_for('static', filename='images/poetry_plume.jpg') }}" alt="" width="400px" height="400px" alt="">
+                            <div class="portfolio-box-caption">
+                                <div class="project-category text-white-50">
+                                        <h2>Word neural network 1 Antonio Machado </h2>
+                                        <h5>Params: Diversity (0.5, 0.8, 1.0, 1.2), epochs 1000, activation Tanh, batch Size 256</h5>
+                                </div>
+                                <br>
+                                <div class="project-name text-white-50" style="font-family: 'Architects Daughter', cursive;">
+                                    <h5>
+                                            que una verdad divina temblando está de miedo y es una flor que quiere echar su nos tan que tiene el oro y la tierra de alvargonzález y el el cielo desde una fosa que hiende en tierra mal hermano en la tierra tumulto caja de un lobo duerme en la tierra el
+
+                                            gusto al alma distraídamente la tierra de alvargonzález hacia a la laguna guerra el romance hayas en la buena loba mucho vais un surco de rudos en la tierra mano voy en la mano el
+                                            
+                                            mundo al alma la huerto el primer el viento el rayo el viento y los cabellera de los cristales y el alma hoy sólo son cargado pelados nadie en rubios de
+                                            
+                                            apaga al sueño como sobre un ceño diestra y donde un día y el muy blanca se mejor en el viento brilla los más campos de los rosas a la aldea que cuando una música plaza van grabadas la gloria de 
+                                    </h5>
+                                </div>
+                                <br>
+                                <form action="http://localhost:5000/eng_RNN3" method="POST">                    
+                                    <center>
+                                        <input class="btn btn-warning btn-lg" type="submit" value="Try neural network" id="" />
+                                    </center>
+                                </form>
+                            </div>
+                            </a>
+                        </div>
+                        <div class="col-lg-6 col-sm-6">
+                            <a class="portfolio-box" href="{{ url_for('static', filename='images/poetry_plume.jpg') }}" alt="" width="400px" height="400px">
+                            <img class="img-fluid" src="{{ url_for('static', filename='images/poetry_plume.jpg') }}" alt="" width="400px" height="400px" alt="">
+                            <div class="portfolio-box-caption">
+                                <div class="project-category text-white-50">
+                                    <h2>Word neural network 2 Antonio Machado </h2>
+                                    <h5>Params: Diversity (1.0, 1.2), epochs 100, activation ReLu, batch Size 128</h5>
+                                </div>
+                                <br>
+                                <div class="project-name text-white-50" style="font-family: 'Architects Daughter', cursive;">
+                                    <h5>
+                                            de la fuente resbala corre y sueña lamiendo casi muda la piedra y a la frente de las ascuas tardes los ojos del huerto la tarde de alvargonzález del campo de alvargonzález
+
+                                            la en el campo y la tierra y el bosque de los primavera el alma como luna miguel en la llama padre que el campo entre la primavera la buena de la huerta
+                                            
+                                            la las hermanos al amor de soria de chopos de la espalda y la luz de los poetas de la de primavera los montes en el toro del alma como sus viejas en los frutos prados para el huerto en lo en
+                                            
+                                            en la tarde marcha las secretas con el ellas de los lumbre sobre la blanca quemada al poeta infantil los alvargonzález del agua los campos yermos a mi tierra 
+                                    </h5>
+                                </div>
+                                <br>
+                                <form action="http://localhost:5000/eng_RNN4" method="POST">                    
+                                    <center>
+                                        <input class="btn btn-warning btn-lg" type="submit" value="Try neural network" id="" />
+                                    </center>
+                                </form>
+                            </div>
+                            </a>
+                        </div>
+                </div>
+            </div>
+</section>
+{% endblock gen %}
